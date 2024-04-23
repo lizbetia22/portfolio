@@ -8,6 +8,9 @@
 # testing
 /coverage
 
+# IDE / Editor specific files
+.idea/
+
 # production
 /build
 
