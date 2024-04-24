@@ -8,8 +8,8 @@ function About() {
                     <div className="flex flex-col justify-center space-y-4">
                         <div className="space-y-2">
                             <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Yelyzaveta Piunova</h1>
-                            <h2 className="text-xl font-medium text-gray-500 dark:text-gray-600">Fullstack Web Developer | Software Development Expert in Master 1</h2>
-                            <p className="max-w-[600px] text-gray-500 md:text-xl dark:text-gray-500">
+                            <h2 className="text-xl font-medium text-gray-700">Fullstack Web Developer | Software Development Expert in Master 1</h2>
+                            <p className="max-w-[600px] text-gray-600 md:text-xl">
                                 I am a Master's student and Fullstack Developer with advanced proficiency in building robust and scalable applications. My expertise lies in developing RESTful web services, microservices, and Single Page Application with modular architecture and reactive user interfaces.
                             </p>
                         </div>
