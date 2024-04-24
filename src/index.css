@@ -2,3 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --color-dark_1: #1a202c;
+    --color-dark_2: #2d3748;
+    --color-dark_3: #064663;
+    --color-dark_4: #ECB365;
+    --color-light_1: #ffffff;
+    --color-light_2: #F3F4F6;
+    --color-light_3: #6B7280;
+    --color-light_4: #000000;
+}

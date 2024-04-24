@@ -1,16 +1,31 @@
 import React from 'react';
 
-function About() {
+function About({ language }) {
+    const aboutData = {
+        fr: {
+            name: 'Yelyzaveta Piunova',
+            title_1: 'Développeur Web Fullstack | Expert en développement logiciel en Master 1',
+            title_2: 'Je suis étudiante en Master et développeuse Fullstack avec une expertise avancée dans la création d\'applications robustes et évolutives. Mon expertise réside dans le développement de services web RESTful, de microservices et d\'applications à page unique avec une architecture modulaire et des interfaces utilisateur réactives.'
+        },
+        en: {
+            name: 'Yelyzaveta Piunova',
+            title_1: 'Fullstack Web Developer | Software Development Expert in Master 1',
+            title_2: 'I am a Master\'s student and Fullstack Developer with advanced proficiency in building robust and scalable applications. My expertise lies in developing RESTful web services, microservices, and Single Page Application with modular architecture and reactive user interfaces.'
+        }
+    };
+
+    const selectedLanguageData = aboutData[language];
+
     return (
         <>
             <div className="container px-4 md:px-6">
                 <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                     <div className="flex flex-col justify-center space-y-4">
                         <div className="space-y-2">
-                            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">Yelyzaveta Piunova</h1>
-                            <h2 className="text-xl font-medium text-gray-700">Fullstack Web Developer | Software Development Expert in Master 1</h2>
+                            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">{selectedLanguageData.name}</h1>
+                            <h2 className="text-xl font-medium text-gray-700">{selectedLanguageData.title_1}</h2>
                             <p className="max-w-[600px] text-gray-600 md:text-xl">
-                                I am a Master's student and Fullstack Developer with advanced proficiency in building robust and scalable applications. My expertise lies in developing RESTful web services, microservices, and Single Page Application with modular architecture and reactive user interfaces.
+                                {selectedLanguageData.title_2}
                             </p>
                         </div>
                     </div>

@@ -5,33 +5,36 @@ import Skills from "./sections/Skills";
 import Experience from "./sections/Experience";
 import Contacts from "./sections/Contacts";
 import Footer from "./components/Footer";
+import {useState} from "react";
 
 function App() {
-  return (
+    const [language, setLanguage] = useState("en"); // Default language is English
+
+    console.log(language)
+    return (
       <>
           <div className="bg-gray-200 dark:bg-gray-800">
-        <Header/>
-
+        <Header language={language} setLanguage={setLanguage}/>
               <section id="about" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-                  <About/>
+                  <About language={language} />
               </section>
 
               <section id="education" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-              <Education/>
+              <Education language={language} />
           </section>
 
           <section id="skills" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-              <Skills/>
+              <Skills language={language} />
           </section>
 
           <section id="experience" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-              <Experience/>
+              <Experience language={language} />
           </section>
 
           <section id="contacts" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-              <Contacts/>
+              <Contacts language={language} />
           </section>
-             <Footer/>
+             <Footer language={language}/>
           </div>
       </>
   );

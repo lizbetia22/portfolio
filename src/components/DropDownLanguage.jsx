@@ -13,11 +13,11 @@ const getFlag = (country) => {
     }
 };
 
-const LanguageDropdown = () => {
+const LanguageDropdown = ({setLanguage}) => {
     const [isOpen, setIsOpen] = useState(false);
     const options = [
-        { value: 'english', label: <div className="flex items-center w-24"><img src={getFlag('GB')} alt="GB Flag" className="w-6 h-6 mr-2 rounded" /> English</div> },
-        { value: 'french', label: <div className="flex items-center"><img src={getFlag('FR')} alt="French Flag" className="w-6 h-6 mr-2 rounded" /> Français</div> }
+        { value: 'en', label: <div className="flex items-center w-24"><img src={getFlag('GB')} alt="GB Flag" className="w-6 h-6 mr-2 rounded" /> English</div> },
+        { value: 'fr', label: <div className="flex items-center"><img src={getFlag('FR')} alt="French Flag" className="w-6 h-6 mr-2 rounded" /> Français</div> }
     ];
 
     const handleLanguageClick = () => {
@@ -25,8 +25,8 @@ const LanguageDropdown = () => {
     };
 
     const handleOptionClick = (selectedOption) => {
-        console.log('Selected:', selectedOption);
         setIsOpen(false);
+        setLanguage(selectedOption.value)
     };
 
     return (
