@@ -6,9 +6,11 @@ import Experience from "./sections/Experience";
 import Contacts from "./sections/Contacts";
 import Footer from "./components/Footer";
 import {useState} from "react";
+import Blog from "./sections/Blog";
+import Login from "./sections/Login";
 
 function App() {
-    const [language, setLanguage] = useState("en"); // Default language is English
+    const [language, setLanguage] = useState("en");
     const [darkMode, setDarkMode] = useState(() => {
         const storedDarkMode = localStorage.getItem('darkMode');
         return storedDarkMode ? JSON.parse(storedDarkMode) : false;
@@ -35,6 +37,15 @@ function App() {
 
           <section id="contacts" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
               <Contacts language={language} />
+
+              <section id="blog" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                  <Blog language={language} />
+              </section>
+
+              <section id="login" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                  <Login language={language} />
+              </section>
+
           </section>
              <Footer language={language}/>
           </div>

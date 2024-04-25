@@ -6,7 +6,6 @@ const DarkMode = ({darkMode,setDarkMode}) => {
         setDarkMode((prevMode) => {
             const newMode = !prevMode;
             localStorage.setItem('darkMode', JSON.stringify(newMode));
-
             return newMode;
         });
     };
@@ -20,7 +19,7 @@ const DarkMode = ({darkMode,setDarkMode}) => {
             style={{color: "black"}}
             checked={darkMode}
             onChange={toggleDarkMode}
-            moonColor={'#ffffff'}
+            moonColor={'#C4BBF0'}
             size={20}
         />
     );
