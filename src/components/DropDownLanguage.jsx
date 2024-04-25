@@ -32,7 +32,7 @@ const LanguageDropdown = ({setLanguage}) => {
     return (
         <div className="relative inline-block">
             <div onClick={handleLanguageClick}>
-                <GrLanguage className="cursor-pointer w-5 h-5" />
+                <GrLanguage className="cursor-pointer w-5 h-5 dark:text-light_1" />
             </div>
             {isOpen && (
                 <div className="absolute right-0 mt-2 bg-white border border-gray-300 divide-y divide-gray-100 rounded-md shadow-lg outline-none">

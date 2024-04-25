@@ -50,54 +50,54 @@ function Contacts({ language }) {
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold">{selectedLanguageData.title_1}</h2>
-                            <p className="text-gray-500 dark:text-gray-400 mt-2">
+                            <h2 className="text-3xl md:text-4xl font-bold dark:text-dark_5">{selectedLanguageData.title_1}</h2>
+                            <p className="text-gray-500 dark:text-light_4 mt-2">
                                 {selectedLanguageData.subTitle_1}
                             </p>
                         </div>
                         <div className="space-y-4">
                             <div className="flex items-center gap-4">
-                                <IoMailOpenOutline className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                <IoMailOpenOutline className="w-6 h-6 text-light_5 dark:text-light_4" />
                                 <div>
-                                    <p className="font-medium">Email</p>
-                                    <h3 className="text-gray-500 dark:text-gray-400 hover:underline">
+                                    <p className="font-medium dark:text-dark_4">Email</p>
+                                    <h3 className=" text-light_5 dark:text-light_4 hover:underline">
                                         {selectedLanguageData.email}
                                     </h3>
                                 </div>
                             </div>
                             <div className="flex items-center gap-4">
-                                <FaPhone className="w-6 h-6 text-gray-500 dark:text-gray-400" />
+                                <FaPhone className="w-6 h-6 text-light_5 dark:text-light_4" />
                                 <div>
-                                    <p className="font-medium">Phone</p>
-                                    <h3 className="text-gray-500 dark:text-gray-400 hover:underline">
+                                    <p className="font-medium dark:text-dark_4">Phone</p>
+                                    <h3 className="text-light_5 dark:text-light_4 hover:underline">
                                         {selectedLanguageData.phone}
                                     </h3>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="bg-gray-100 dark:bg-gray-800 rounded-lg p-6 md:p-8">
-                        <h3 className="text-2xl font-bold mb-4">{selectedLanguageData.sendMsgTitle}</h3>
+                    <div className="bg-light_3 dark:bg-dark_4 rounded-lg p-6 md:p-8">
+                        <h3 className="text-2xl font-bold mb-4 dark:text-dark_3">{selectedLanguageData.sendMsgTitle}</h3>
                         <form className="space-y-4">
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="name">
+                                <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="name">
                                     {selectedLanguageData.labels.name}
                                 </label>
-                                <input id="name" placeholder={selectedLanguageData.placeholders.name} className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" />
+                                <input id="name" placeholder={selectedLanguageData.placeholders.name} className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="email">
+                                <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="email">
                                     {selectedLanguageData.labels.email}
                                 </label>
-                                <input id="email" placeholder={selectedLanguageData.placeholders.email} type="email" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" />
+                                <input id="email" placeholder={selectedLanguageData.placeholders.email} type="email" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
                             </div>
                             <div>
-                                <label className="block text-sm font-medium text-gray-700 dark:text-gray-300" htmlFor="message">
+                                <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="message">
                                     {selectedLanguageData.labels.message}
                                 </label>
-                                <textarea className="w-full min-h-[120px] px-4 py-2 border rounded-md focus:outline-none focus:border-blue-400" id="message" placeholder={selectedLanguageData.placeholders.message} />
+                                <textarea className="w-full min-h-[120px] px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" id="message" placeholder={selectedLanguageData.placeholders.message} />
                             </div>
-                            <button className="w-full bg-gray-600 text-white px-4 py-2 rounded-md hover:bg-gray-800 focus:outline-none focus:bg-blue-600" type="submit">
+                            <button className="w-full bg-light_6 dark:bg-dark_3 text-white px-4 py-2 rounded-md hover:bg-light_7 dark:hover:bg-dark_2 focus:outline-none focus:bg-light_7">
                                 {selectedLanguageData.sendMsgBtnText}
                             </button>
                         </form>

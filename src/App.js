@@ -9,17 +9,19 @@ import {useState} from "react";
 
 function App() {
     const [language, setLanguage] = useState("en"); // Default language is English
-
-    console.log(language)
+    const [darkMode, setDarkMode] = useState(() => {
+        const storedDarkMode = localStorage.getItem('darkMode');
+        return storedDarkMode ? JSON.parse(storedDarkMode) : false;
+    });
     return (
       <>
-          <div className="bg-gray-200 dark:bg-gray-800">
-        <Header language={language} setLanguage={setLanguage}/>
-              <section id="about" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-                  <About language={language} />
-              </section>
+          <div className="bg-light_2 dark:bg-dark_2">
+        <Header language={language} setLanguage={setLanguage} darkMode={darkMode} setDarkMode={setDarkMode}/>
+          <section id="about" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+              <About language={language} />
+          </section>
 
-              <section id="education" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+          <section id="education" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
               <Education language={language} />
           </section>
 

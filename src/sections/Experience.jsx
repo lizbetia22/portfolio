@@ -56,18 +56,18 @@ function Experience({ language }) {
     return (
         <>
             <div className="max-w-4xl mx-auto">
-                <h2 className="text-3xl font-bold mb-4">{selectedLanguageData.title}</h2>
+                <h2 className="text-3xl font-bold mb-4 dark:text-dark_5">{selectedLanguageData.title}</h2>
                 <div className="relative">
                     <div className="absolute top-0 left-0 w-0.5 h-full bg-gray-300 dark:bg-gray-700" />
                     <div className="space-y-8">
                         {selectedLanguageData.jobs.map((job, index) => (
                             <div key={index} className="relative pl-8">
-                                <div className="absolute top-1 left-0 w-4 h-4 rounded-full bg-gray-900 dark:bg-gray-700">
-                                    <BsFillCircleFill className="text-white" style={{ color: "inherit" }} />
+                                <div className="absolute top-1 left-0 w-4 h-4 rounded-full">
+                                    <BsFillCircleFill className="dark:text-dark_4 text-light_7"  />
                                 </div>
-                                <h3 className="text-xl font-semibold mb-2">{job.position}</h3>
-                                <p className="text-gray-500 dark:text-gray-400 mb-2">{job.company} | {job.date}</p>
-                                <p className="text-gray-700 dark:text-gray-300">{job.description}</p>
+                                <h3 className="text-xl font-semibold mb-2 dark:text-dark_5">{job.position}</h3>
+                                <p className="text-light_5 dark:text-light_5 mb-2">{job.company} | {job.date}</p>
+                                <p className="text-light_6 dark:text-light_2">{job.description}</p>
                             </div>
                         ))}
                     </div>

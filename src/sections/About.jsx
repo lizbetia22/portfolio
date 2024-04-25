@@ -22,9 +22,9 @@ function About({ language }) {
                 <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
                     <div className="flex flex-col justify-center space-y-4">
                         <div className="space-y-2">
-                            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none">{selectedLanguageData.name}</h1>
-                            <h2 className="text-xl font-medium text-gray-700">{selectedLanguageData.title_1}</h2>
-                            <p className="max-w-[600px] text-gray-600 md:text-xl">
+                            <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl dark:text-dark_5 xl:text-6xl/none">{selectedLanguageData.name}</h1>
+                            <h2 className="text-xl font-medium text-light_6 dark:text-dark_4">{selectedLanguageData.title_1}</h2>
+                            <p className="max-w-[600px] text-light_6 dark:text-light_1 md:text-xl">
                                 {selectedLanguageData.title_2}
                             </p>
                         </div>

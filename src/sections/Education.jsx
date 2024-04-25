@@ -2,6 +2,7 @@ import React from 'react';
 import { SlGraduation } from "react-icons/sl";
 import { LuFileBadge } from "react-icons/lu";
 import { GoTrophy } from "react-icons/go";
+import { LiaUniversitySolid } from "react-icons/lia";
 
 function Education({ language }) {
     const educationData = {
@@ -55,7 +56,7 @@ function Education({ language }) {
                     institution: "NURE: Kharkiv National University of Radioelectronics",
                     status: "Completed: June 2023",
                     average: "",
-                    icon: <LuFileBadge className="h-8 w-8 text-gray-500 dark:text-gray-400" />
+                    icon: <LuFileBadge className="h-12 w-12 text-gray-500 dark:text-gray-400" />
                 }
             ]
         }
@@ -68,8 +69,8 @@ function Education({ language }) {
             <div className="container px-4 md:px-6">
                 <div className="flex flex-col items-center justify-center space-y-4 text-center">
                     <div className="space-y-2">
-                        <h2 className="text-3xl font-bold tracking-tighter sm:text-5xl">{selectedLanguageData.title}</h2>
-                        <p className="max-w-[900px] text-gray-500 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-400">
+                        <h2 className="text-3xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">{selectedLanguageData.title}</h2>
+                        <p className="max-w-[900px] dark:text-light_4 text-light_6 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-500">
                             {selectedLanguageData.description}
                         </p>
                     </div>
@@ -81,27 +82,21 @@ function Education({ language }) {
                                 <li key={index} className="flex items-start gap-4">
                                     {course.icon}
                                     <div className="space-y-1">
-                                        <h3 className="text-xl font-bold">{course.title}</h3>
-                                        <p className="text-gray-500 dark:text-gray-400">{course.institution}</p>
-                                        <p className="text-gray-500 dark:text-gray-400">{course.status}</p>
-                                        {course.average && <p className="text-gray-500 dark:text-gray-400">Average: {course.average}</p>}
+                                        <h3 className="text-xl dark:text-light_1 font-bold">{course.title}</h3>
+                                        <p className="text-light_6 dark:text-dark_5">{course.institution}</p>
+                                        <p className="text-light_6 dark:text-dark_5">{course.status}</p>
+                                        {course.average && <p className="text-light_6 dark:text-dark_5">Average: {course.average}</p>}
                                     </div>
                                 </li>
                             ))}
                         </ul>
                     </div>
-                    <img
-                        alt="Education"
-                        style={{
-                            display: 'block',
-                            maxWidth: '730px',
-                            maxHeight: '325px',
-                            width: 'auto',
-                            height: 'auto',
-                            margin: 'auto'
-                        }}
-                        src="/educations.png"
-                    />
+                    <LiaUniversitySolid className="lg:aspect-square h-72 w-72 dark:text-light_1" />
+                    {/*<img*/}
+                    {/*    alt="Education"*/}
+                    {/*    className="aspect-video overflow-hidden rounded-xl object-cover lg:aspect-square h-2/2 w-2/3 dark:text-light_1"*/}
+                    {/*    src="/university_logo.png"*/}
+                    {/*/>*/}
                 </div>
             </div>
         </>
