@@ -121,6 +121,7 @@ function Skills({ language }) {
                         </div>
                     </div>
                 </div>
+            <div className="skills-section"></div>
         </>
     );
 }

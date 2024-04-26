@@ -1,9 +1,13 @@
 import React from 'react';
+import {useNavigate} from "react-router";
 
 function Login({ language }) {
 
+    const navigate = useNavigate();
+
     return (
         <>
+           <div className="mt-36 mb-28">
             <div className="space-y-2 text-center">
                 <h2 className="text-xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">Connection</h2>
                 <p className="dark:text-light_4 text-light_6 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-500">
@@ -17,7 +21,7 @@ function Login({ language }) {
                         <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="email">
                             Email
                         </label>
-                        <input id="email" type="email" placeholder="example@gmail.com" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
+                        <input id="email_login" type="email" placeholder="example@gmail.com" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
                     </div>
                     <div>
                         <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="password">
@@ -25,11 +29,12 @@ function Login({ language }) {
                         </label>
                         <input id="password" type="password" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
                     </div>
-                    <button className="w-full bg-light_6 dark:bg-dark_3 text-white px-4 py-2 rounded-md hover:bg-light_7 dark:hover:bg-dark_2 focus:outline-none focus:bg-light_7">
+                    <button onClick={()=>{navigate('/blog')}}  className="w-full bg-light_6 dark:bg-dark_3 text-white px-4 py-2 rounded-md hover:bg-light_7 dark:hover:bg-dark_2 focus:outline-none focus:bg-light_7">
                         Connection
                     </button>
                 </form>
             </div>
+           </div>
         </>
     );
 }
