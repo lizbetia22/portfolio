@@ -1,11 +1,42 @@
 import React, { useEffect, useState } from 'react';
-import { FaComment } from "react-icons/fa";
+import { FaComment, FaTrash } from "react-icons/fa";
+import { IoSettings } from "react-icons/io5";
+import ModalDelete from "../components/ModalDelete";
+import ModalEdit from "../components/ModalEdit";
 
-function Blog() {
+function Blog({language}) {
     const [posts, setPosts] = useState([]);
     const [isVisible, setIsVisible] = useState(false);
-    const [comments, setComments] = useState([]);
+    const [comments, setComments] = useState({});
     const [showComments, setShowComments] = useState({});
+    const [editingPost, setEditingPost] = useState(null);
+    const [editedTitle, setEditedTitle] = useState('');
+    const [editedBody, setEditedBody] = useState('');
+    const [editedTags, setEditedTags] = useState('');
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [postToDelete, setPostToDelete] = useState(null);
+
+    const blogData = {
+        fr: {
+            button_edit: 'Modifier l\'article',
+            button_delete: 'Supprimer l\'article',
+            button_comments: 'Commentaires',
+            title_comments: 'Commentaires: ',
+            reactions: 'Réactions',
+            title_1: 'Articles',
+            title_2: 'Vous pouvez y découvrir de nouveaux articles'
+        },
+        en: {
+            button_edit: 'Modify post',
+            button_delete: 'Delete post',
+            button_comments: 'Comments',
+            title_comments: 'Comments: ',
+            reactions: 'Reactions',
+            title_1: 'Blog',
+            title_2: 'Here you can discover new posts'
+        }
+    };
+
 
     useEffect(() => {
         setIsVisible(true);
@@ -17,13 +48,13 @@ function Blog() {
         })
             .then((response) => response.json())
             .then((data) => {
-                const firstTenPosts = data.posts.slice(0, 10);
+                const firstTenPosts = data.posts.map(post => ({ ...post, reactions: post.reactions || 0 }));
                 setPosts(firstTenPosts);
             })
             .catch((error) => console.log(error));
     }, []);
 
-    async function showCommentsForPost(id){
+    async function showCommentsForPost(id) {
         fetch(`https://dummyjson.com/posts/${id}/comments`)
             .then(res => res.json())
             .then((data) => {
@@ -34,22 +65,69 @@ function Blog() {
             });
     }
 
-
     const toggleComments = (postId) => {
         setShowComments(prevState => ({
             ...prevState,
             [postId]: !prevState[postId]
         }));
-        showCommentsForPost(postId)
+        showCommentsForPost(postId);
     };
 
+    const openEditModal = (post) => {
+        setEditingPost(post);
+        setEditedTitle(post.title);
+        setEditedBody(post.body);
+        setEditedTags(post.tags.join(', '));
+    };
+
+    const incrementReactions = (postId) => {
+        const updatedPosts = posts.map(post => {
+            if (post.id === postId) {
+                return { ...post, reactions: post.reactions + 1 };
+            } else {
+                return post;
+            }
+        });
+        setPosts(updatedPosts);
+    };
+
+    const decrementReactions = (postId) => {
+        const updatedPosts = posts.map(post => {
+            if (post.id === postId && post.reactions > 0) {
+                return { ...post, reactions: post.reactions - 1 };
+            } else {
+                return post;
+            }
+        });
+        setPosts(updatedPosts);
+    };
+
+    const deletePost = () => {
+        const updatedPosts = posts.filter(post => post.id !== postToDelete.id);
+        setPosts(updatedPosts);
+        setPostToDelete(null);
+        setShowDeleteModal(false);
+    };
+
+    const saveEditedPost = () => {
+        const updatedPosts = posts.map(post => {
+            if (post.id === editingPost.id) {
+                return { ...post, title: editedTitle, body: editedBody, tags: editedTags.split(',').map(tag => tag.trim()) }; // Convert string back to array
+            } else {
+                return post;
+            }
+        });
+        setPosts(updatedPosts);
+        setEditingPost(null);
+    };
+    const translations = blogData[language];
     return (
         <>
             <div className={`mt-20 mb-10 ${isVisible ? 'fade-in' : ''}`}>
                 <div className="space-y-2 text-center">
-                    <h2 className="text-3xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">Blog</h2>
+                    <h2 className="text-3xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">{translations.title_1}</h2>
                     <p className="dark:text-light_4 text-light_6 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-500">
-                        Here you can discover new posts
+                        {translations.title_2}
                     </p>
                 </div>
                 <div className="mr-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-10  ml-12">
@@ -70,13 +148,13 @@ function Blog() {
                                             ))}
                                         </div>
                                         <div className="flex items-center justify-between">
-                                            <span className="text-gray-400 text-sm">Reactions: {post.reactions}</span>
+                                            <span className="text-gray-400 text-sm">  {translations.reactions}: {post.reactions}</span>
                                         </div>
                                     </div>
-                                    {/* Affichage des commentaires */}
+                                    {/* Show comments */}
                                     {showComments[post.id] && comments[post.id] && (
                                         <div className="p-4  dark:bg-dark_3 mt-4 rounded-lg">
-                                            <h3 className="text-lg font-semibold mb-2 dark:text-light_3">Comments:</h3>
+                                            <h3 className="text-lg font-semibold mb-2 dark:text-light_3">{translations.title_comments}</h3>
                                             {comments[post.id].map(comment => (
                                                 <div key={comment.id} className="flex items-center mb-2">
                                                     <div className="w-8 h-8 bg-gray-300 dark:bg-dark_4 rounded-full flex items-center justify-center mr-2">
@@ -92,7 +170,7 @@ function Blog() {
                                     )}
                                     <div className="p-4  dark:bg-dark_3 mt-4 rounded-lg">
                                         <div className="flex items-center">
-                                            <button className="text-light_5 dark:text-light_4 hover:text-light_6 dark:hover:text-dark_5 mr-2">
+                                            <button className="text-light_5 dark:text-light_4 hover:text-light_6 dark:hover:text-dark_5 mr-2" onClick={() => incrementReactions(post.id)}>
                                                 <svg
                                                     className="w-6 h-6"
                                                     fill="none"
@@ -108,7 +186,7 @@ function Blog() {
                                                     />
                                                 </svg>
                                             </button>
-                                            <button className="text-light_5 dark:text-light_4 hover:text-light_6 dark:hover:text-dark_5  mr-2">
+                                            <button className="text-light_5 dark:text-light_4 hover:text-light_6 dark:hover:text-dark_5  mr-2" onClick={() => decrementReactions(post.id)}>
                                                 <svg
                                                     className="w-6 h-6"
                                                     fill="none"
@@ -128,7 +206,23 @@ function Blog() {
                                                 className="flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
                                                 onClick={() => toggleComments(post.id)}>
                                                 <FaComment className="w-4 h-4 mr-2"/>
-                                                Comments
+                                                {translations.button_comments}
+                                            </button>
+                                            <button
+                                                className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
+                                                onClick={() => openEditModal(post)}>
+                                                <IoSettings className="w-4 h-4 mr-2"/>
+                                                {translations.button_edit}
+                                            </button>
+                                            <button
+                                                className="ml-2 flex items-center text-red-700 border border-red-700 px-4 py-2 rounded-md hover:bg-red-700 hover:text-white"
+                                                onClick={() => {
+                                                    setPostToDelete(post);
+                                                    setShowDeleteModal(true);
+                                                }}
+                                            >
+                                                <FaTrash className="w-4 h-4 mr-2"/>
+                                                {translations.button_delete}
                                             </button>
                                         </div>
                                     </div>
@@ -138,6 +232,10 @@ function Blog() {
                     }
                 </div>
             </div>
+            {/* Modal for edit post */}
+            <ModalEdit language={language} editingPost={editingPost} editedTitle={editedTitle} setEditedTitle={setEditedTitle} editedBody={editedBody} setEditedBody={setEditedBody} editedTags={editedTags} setEditedTags={setEditedTags} setEditingPost={setEditingPost} saveEditedPost={saveEditedPost}/>
+            {/* Modal for delete post */}
+            <ModalDelete language={language} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} deletePost={deletePost}/>
         </>
     );
 }

@@ -16,11 +16,13 @@ function App() {
         const storedDarkMode = localStorage.getItem('darkMode');
         return storedDarkMode ? JSON.parse(storedDarkMode) : false;
     });
+    const [skillsInView, setSkillsInView] = useState(false);
+
     return (
       <>
           <Router>
               <div className="bg-light_2 dark:bg-dark_2">
-                  <Header language={language} setLanguage={setLanguage} darkMode={darkMode} setDarkMode={setDarkMode}/>
+                  <Header language={language} setLanguage={setLanguage} darkMode={darkMode} setDarkMode={setDarkMode} skillsInView={skillsInView} setSkillsInView={setSkillsInView}/>
                   <Routes>
                       <Route
                           path="/"
@@ -35,7 +37,7 @@ function App() {
                                   </section>
 
                                   <section id="skills" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-                                      <Skills language={language}/>
+                                      <Skills language={language} skillsInView={skillsInView}/>
                                   </section>
 
                                   <section id="experience" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">

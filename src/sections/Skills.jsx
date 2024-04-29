@@ -4,7 +4,7 @@ import { FaNodeJs, FaAngular, FaReact, FaConfluence } from "react-icons/fa";
 import { IoLogoCss3 } from "react-icons/io5";
 import { SiPostgresql, SiMicrosoftazure } from "react-icons/si";
 
-function Skills({ language }) {
+function Skills({ language, skillsInView }) {
     const skillsData = {
         fr: {
             title: 'Mes Compétences',
@@ -102,6 +102,7 @@ function Skills({ language }) {
 
     const selectedLanguageData = skillsData[language];
 
+    console.log(skillsInView)
     return (
         <>
                 <div className="container mx-auto px-4 md:px-8">
@@ -112,7 +113,7 @@ function Skills({ language }) {
                         </div>
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                             {selectedLanguageData.skills.map((skill, index) => (
-                                <div key={index} className="skill-card bg-light_3 dark:bg-dark_3 rounded-lg p-6 flex flex-col items-center gap-4">
+                                <div key={index} className={`skill-card bg-light_3 dark:bg-dark_3 rounded-lg p-6 flex flex-col items-center gap-4 ${skillsInView ? 'animate' : ''}`}>
                                     {skill.icon}
                                     <h3 className="text-lg font-bold dark:text-dark_5">{skill.name}</h3>
                                     <p className="text-gray-700 dark:text-light_2 text-sm">{skill.description}</p>

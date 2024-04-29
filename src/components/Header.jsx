@@ -6,10 +6,9 @@ import DarkMode from "./DarkMode";
 import {useLocation, useNavigate} from "react-router";
 import { IoHome } from "react-icons/io5";
 
-const Header = ({language, setLanguage, darkMode, setDarkMode}) => {
+const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView}) => {
     const [headerHeight, setHeaderHeight] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
-  //  const [skillsInView, setSkillsInView] = useState(false);
     const navigate = useNavigate();
     const location = useLocation();
     const currentPath = location.pathname;
@@ -44,25 +43,25 @@ const Header = ({language, setLanguage, darkMode, setDarkMode}) => {
     useEffect(() => {
         const handleScroll = () => {
             setScrollPosition(window.scrollY);
-           // const skillsSection = document.getElementById("skills");
-            // if (skillsSection) {
-            //     const skillsSectionTop = skillsSection.offsetTop;
-            //     const skillsSectionHeight = skillsSection.offsetHeight;
-            //     const windowBottom = window.scrollY + window.innerHeight;
-                // Check if skills section is in view
-                // if (windowBottom > skillsSectionTop && window.scrollY < skillsSectionTop + skillsSectionHeight) {
-                //     setSkillsInView(true);
-                // } else {
-                //     setSkillsInView(false);
-                // }
-            // }
+           const skillsSection = document.getElementById("skills");
+            if (skillsSection) {
+                const skillsSectionTop = skillsSection.offsetTop;
+                const skillsSectionHeight = skillsSection.offsetHeight;
+                const windowBottom = window.scrollY + window.innerHeight;
+                //Check if skills section is in view
+                if (windowBottom > skillsSectionTop && window.scrollY < skillsSectionTop + skillsSectionHeight) {
+                    setSkillsInView(true);
+                } else {
+                    setSkillsInView(false);
+                }
+            }
         };
 
         window.addEventListener("scroll", handleScroll);
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, []);
+    }, [setSkillsInView]);
 
     const headerTransparency = Math.min(scrollPosition / 500, 1);
 
