@@ -1,6 +1,8 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import emailjs from '@emailjs/browser';
 import { IoMailOpenOutline } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa";
+import {GoogleReCaptcha, GoogleReCaptchaProvider} from 'react-google-recaptcha-v3';
 
 function Contacts({ language, contactsInView }) {
     const contactsData = {
@@ -11,6 +13,12 @@ function Contacts({ language, contactsInView }) {
             phone: '+33 (7) 89-03-43-02',
             sendMsgTitle: 'Envoyer un message',
             sendMsgBtnText: 'Envoyer le message',
+            error_name:'Le prenom est obligatoire!',
+            error_email:'L\'adresse email est obligatoire!',
+            error_message:'Le message est obligatoire !',
+            error_format_email: 'Format incorrect de l\'email',
+            alert_success: 'L\'email a été envoyé avec succès!',
+            alert_danger: 'Erreur de serveur interne ! Veuillez réessayer plus tard!',
             placeholders: {
                 name: 'Votre nom',
                 email: 'Votre email',
@@ -29,6 +37,12 @@ function Contacts({ language, contactsInView }) {
             phone: '+33 (7) 89-03-43-02',
             sendMsgTitle: 'Send a Message',
             sendMsgBtnText: 'Send Message',
+            error_name:'Name is required!',
+            error_email:'Email is required!',
+            error_message:'Message is required!',
+            error_format_email: 'Incorrect format of email',
+            alert_success: 'Email was send successfully!',
+            alert_danger: 'Internal server error! Please try it later',
             placeholders: {
                 name: 'Your name',
                 email: 'Your email',
@@ -43,10 +57,116 @@ function Contacts({ language, contactsInView }) {
     };
 
     const selectedLanguageData = contactsData[language];
+    const [formData, setFormData] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [errors, setErrors] = useState({
+        name: '',
+        email: '',
+        message: ''
+    });
+    const [isSuccess, setIsSuccess] = useState(false);
+    const [isError, setIsError] = useState(false);
+    const [captchaToken, setCaptchaToken] = useState(null);
+
+    const handleCaptcha = (token) => {
+        setCaptchaToken(token);
+    };
+
+    const validateForm = () => {
+        let valid = true;
+        const newErrors = { ...errors };
+
+        if (!formData.name.trim()) {
+            newErrors.name = selectedLanguageData.error_name;
+            valid = false;
+        } else {
+            newErrors.name = '';
+        }
+
+        if (!formData.email.trim()) {
+            newErrors.email = selectedLanguageData.error_email;
+            valid = false;
+        } else {
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const isValidEmail = emailRegex.test(formData.email.trim());
+            if (!isValidEmail) {
+                newErrors.email = selectedLanguageData.error_format_email;
+                valid = false;
+            } else {
+                newErrors.email = '';
+            }
+        }
+
+        if (!formData.message.trim()) {
+            newErrors.message = selectedLanguageData.error_message;
+            valid = false;
+        } else {
+            newErrors.message = '';
+        }
+
+        setErrors(newErrors);
+        return valid;
+    };
+
+
+    useEffect(() => {
+        let successTimer;
+        let errorTimer;
+
+        if (isSuccess) {
+            successTimer = setTimeout(() => {
+                setIsSuccess(false);
+            }, 10000);
+        }
+
+        if (isError) {
+            errorTimer = setTimeout(() => {
+                setIsError(false);
+            }, 10000);
+        }
+
+        return () => {
+            clearTimeout(successTimer);
+            clearTimeout(errorTimer);
+        };
+    }, [isSuccess, isError]);
+
+    const handleChange = (e) => {
+        const {name, value} = e.target;
+        setFormData({...formData, [name]: value});
+    };
+
+    const sendEmail = (e) => {
+        e.preventDefault();
+
+        if (!validateForm()) {
+            return;
+        }
+
+        if(captchaToken){
+
+        emailjs
+            .send(process.env.REACT_APP_SERVICE_ID, process.env.REACT_APP_TEMPLATE_ID_EMAIL, formData, process.env.REACT_APP_PUBLIC_KEY)
+            .then(
+                () => {
+                    setIsSuccess(true);
+                    setIsError(false);
+                    setFormData({ name: '', email: '', message: '' });
+                },
+                (error) => {
+                    setIsSuccess(false);
+                    setIsError(true);
+                },
+            );
+        }
+    };
 
     return (
         <>
-            <div className="w-full max-w-4xl mx-auto py-12 md:py-20 px-4 md:px-6">
+            <div className="w-full max-w-4xl mx-auto py-12 md:py-0.5 px-4 md:px-6">
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                     <div className="space-y-6">
                         <div>
@@ -77,27 +197,41 @@ function Contacts({ language, contactsInView }) {
                         </div>
                     </div>
                     <div className={`bg-light_3 dark:bg-dark_4 rounded-lg p-6 md:p-8 ${contactsInView ? 'contact-item' : ''}`}>
+                        <div>
+                            {isSuccess && <p className="text-green-600 text-base">{selectedLanguageData.alert_success}</p>}
+                        </div>
+                        <div>
+                            {isError && <p className="text-red-600 text-base">{selectedLanguageData.alert_danger}</p>}
+                        </div>
                         <h3 className="text-2xl font-bold mb-4 dark:text-dark_3">{selectedLanguageData.sendMsgTitle}</h3>
                         <form className="space-y-4">
                             <div>
                                 <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="name">
                                     {selectedLanguageData.labels.name}
                                 </label>
-                                <input id="name" placeholder={selectedLanguageData.placeholders.name} className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
+                                <input name="name" id="name" placeholder={selectedLanguageData.placeholders.name} value={formData.name}
+                                       onChange={handleChange} className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3"/>
+                                {errors.name && <p className="text-red-500 text-sm">{errors.name}</p>}
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="email">
                                     {selectedLanguageData.labels.email}
                                 </label>
-                                <input id="email" placeholder={selectedLanguageData.placeholders.email} type="email" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
+                                <input name="email" id="email" placeholder={selectedLanguageData.placeholders.email} value={formData.email} onChange={handleChange} type="email" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" />
+                                {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-light_7 dark:text-light_1" htmlFor="message">
                                     {selectedLanguageData.labels.message}
                                 </label>
-                                <textarea className="w-full min-h-[120px] px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" id="message" placeholder={selectedLanguageData.placeholders.message} />
+                                <textarea name="message" className="w-full min-h-[120px] px-4 py-2 border rounded-md focus:outline-none focus:border-light_6 dark:focus:border-dark_3" id="message"
+                                          value={formData.message} onChange={handleChange}  placeholder={selectedLanguageData.placeholders.message} />
+                                {errors.message && <p className="text-red-500 text-sm">{errors.message}</p>}
                             </div>
-                            <button className="w-full bg-light_6 dark:bg-dark_3 text-white px-4 py-2 rounded-md hover:bg-light_7 dark:hover:bg-dark_2 focus:outline-none focus:bg-light_7">
+                            <div>
+                                <GoogleReCaptcha onVerify={handleCaptcha} />
+                            </div>
+                            <button className="w-full bg-light_6 dark:bg-dark_3 text-white px-4 py-2 rounded-md hover:bg-light_7 dark:hover:bg-dark_2 focus:outline-none focus:bg-light_7"  onClick={(e) => sendEmail(e)}>
                                 {selectedLanguageData.sendMsgBtnText}
                             </button>
                         </form>

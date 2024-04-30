@@ -113,7 +113,9 @@ function Skills({ language, skillsInView }) {
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                             {selectedLanguageData.skills.map((skill, index) => (
                                 <div key={index} className={`skill-card bg-light_3 dark:bg-dark_3 rounded-lg p-6 flex flex-col items-center gap-4 ${skillsInView ? 'animate' : ''}`}>
-                                    {skill.icon}
+                                    <div className="icon-container"> {/* Add an extra div for the icon */}
+                                        {skill.icon}
+                                    </div>
                                     <h3 className="text-lg font-bold dark:text-dark_5">{skill.name}</h3>
                                     <p className="text-gray-700 dark:text-light_2 text-sm">{skill.description}</p>
                                 </div>

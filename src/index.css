@@ -149,6 +149,14 @@
 .contact-item:nth-child(2) {
     animation-delay: 1.3s;
 }
+.icon-container {
+    transition: transform 0.3s ease;
+}
+
+.skill-card:hover .icon-container {
+    transform: scale(1.5);
+}
+
 
 
 

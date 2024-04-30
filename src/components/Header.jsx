@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-scroll";
 import LanguageDropdown from "./DropDownLanguage";
-import { SiDailydotdev } from "react-icons/si";
+//import { SiDailydotdev } from "react-icons/si";
 import DarkMode from "./DarkMode";
 import {useLocation, useNavigate} from "react-router";
 import { IoHome } from "react-icons/io5";
+import { FaFacebookMessenger } from "react-icons/fa";
 
 const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, setEducationInView, setExperienceInView, setContactsInView}) => {
     const [headerHeight, setHeaderHeight] = useState(0);
@@ -133,7 +134,7 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, 
             >
                 <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                     <div className="flex items-center">
-                            <SiDailydotdev onClick={()=>{navigate('/login')}} className="w-8 h-8 dark:text-light_1 cursor-pointer" />
+                            <FaFacebookMessenger  onClick={()=>{navigate('/login')}} className="w-7 h-7 dark:text-light_1 cursor-pointer" />
                         {currentPath !== "/" ?
                             <>
                                 <button onClick={()=>{navigate("/")}}
