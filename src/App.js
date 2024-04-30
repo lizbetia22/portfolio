@@ -17,12 +17,15 @@ function App() {
         return storedDarkMode ? JSON.parse(storedDarkMode) : false;
     });
     const [skillsInView, setSkillsInView] = useState(false);
+    const [educationInView, setEducationInView] = useState(false);
+    const [experienceInView, setExperienceInView] = useState(false);
+    const [contactsInView, setContactsInView] = useState(false);
 
     return (
       <>
           <Router>
               <div className="bg-light_2 dark:bg-dark_2">
-                  <Header language={language} setLanguage={setLanguage} darkMode={darkMode} setDarkMode={setDarkMode} skillsInView={skillsInView} setSkillsInView={setSkillsInView}/>
+                  <Header language={language} setLanguage={setLanguage} darkMode={darkMode} setDarkMode={setDarkMode} skillsInView={skillsInView} setSkillsInView={setSkillsInView} setEducationInView={setEducationInView} setExperienceInView={setExperienceInView} setContactsInView={setContactsInView}/>
                   <Routes>
                       <Route
                           path="/"
@@ -33,7 +36,7 @@ function App() {
                                   </section>
 
                                   <section id="education" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-                                      <Education language={language}/>
+                                      <Education language={language} educationInView={educationInView}/>
                                   </section>
 
                                   <section id="skills" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
@@ -41,11 +44,11 @@ function App() {
                                   </section>
 
                                   <section id="experience" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-                                      <Experience language={language}/>
+                                      <Experience language={language} experienceInView={experienceInView}/>
                                   </section>
 
                                   <section id="contacts" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
-                                      <Contacts language={language}/>
+                                      <Contacts language={language} contactsInView={contactsInView}/>
                                   </section>
                               </>
                           }

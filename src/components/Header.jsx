@@ -6,7 +6,7 @@ import DarkMode from "./DarkMode";
 import {useLocation, useNavigate} from "react-router";
 import { IoHome } from "react-icons/io5";
 
-const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView}) => {
+const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, setEducationInView, setExperienceInView, setContactsInView}) => {
     const [headerHeight, setHeaderHeight] = useState(0);
     const [scrollPosition, setScrollPosition] = useState(0);
     const navigate = useNavigate();
@@ -44,6 +44,42 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView})
         const handleScroll = () => {
             setScrollPosition(window.scrollY);
            const skillsSection = document.getElementById("skills");
+           const educationSection = document.getElementById("education");
+           const experienceSection = document.getElementById("experience");
+           const contactsSection = document.getElementById("contacts");
+            if (contactsSection) {
+                const contactsSectionTop = contactsSection.offsetTop;
+                const contactsSectionHeight = contactsSection.offsetHeight;
+                const windowBottom = window.scrollY + window.innerHeight;
+                //Check if contacts section is in view
+                if (windowBottom > contactsSectionTop && window.scrollY < contactsSectionTop + contactsSectionHeight) {
+                    setContactsInView(true);
+                } else {
+                    setContactsInView(false);
+                }
+            }
+            if (experienceSection) {
+                const experienceSectionTop = experienceSection.offsetTop;
+                const experienceSectionHeight = experienceSection.offsetHeight;
+                const windowBottom = window.scrollY + window.innerHeight;
+                //Check if experience section is in view
+                if (windowBottom > experienceSectionTop && window.scrollY < experienceSectionTop + experienceSectionHeight) {
+                    setExperienceInView(true);
+                } else {
+                    setExperienceInView(false);
+                }
+            }
+            if (educationSection) {
+                const educationSectionTop = educationSection.offsetTop;
+                const educationSectionHeight = educationSection.offsetHeight;
+                const windowBottom = window.scrollY + window.innerHeight;
+                //Check if education section is in view
+                if (windowBottom > educationSectionTop && window.scrollY < educationSectionTop + educationSectionHeight) {
+                    setEducationInView(true);
+                } else {
+                    setEducationInView(false);
+                }
+            }
             if (skillsSection) {
                 const skillsSectionTop = skillsSection.offsetTop;
                 const skillsSectionHeight = skillsSection.offsetHeight;
@@ -61,7 +97,7 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView})
         return () => {
             window.removeEventListener("scroll", handleScroll);
         };
-    }, [setSkillsInView]);
+    }, [setSkillsInView, setEducationInView, setExperienceInView, setContactsInView]);
 
     const headerTransparency = Math.min(scrollPosition / 500, 1);
 
@@ -115,7 +151,7 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView})
                                     <Link
                                         key={index}
                                         to={item.title.toLowerCase()}
-                                        className="cursor-pointer text-lg text-gray-700 dark:text-dark_5 dark:hover:text-dark_2 hover:text-light_7 font-mono"
+                                        className="cursor-pointer text-lg text-gray-700 dark:text-dark_5 dark:hover:text-dark_4 hover:text-light_7 font-mono"
                                         smooth={true}
                                         duration={1400}
                                         spy={true}

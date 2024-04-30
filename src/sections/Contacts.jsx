@@ -2,7 +2,7 @@ import React from 'react';
 import { IoMailOpenOutline } from "react-icons/io5";
 import { FaPhone } from "react-icons/fa";
 
-function Contacts({ language }) {
+function Contacts({ language, contactsInView }) {
     const contactsData = {
         fr: {
             title_1: 'Contactez-moi',
@@ -50,13 +50,13 @@ function Contacts({ language }) {
                 <div className="grid md:grid-cols-2 gap-8 md:gap-12">
                     <div className="space-y-6">
                         <div>
-                            <h2 className="text-3xl md:text-4xl font-bold dark:text-dark_5">{selectedLanguageData.title_1}</h2>
-                            <p className="text-gray-500 dark:text-light_4 mt-2">
+                            <h2 className={`text-3xl md:text-4xl font-bold dark:text-dark_5 ${contactsInView ? 'contact-title' : ''}`}>{selectedLanguageData.title_1}</h2>
+                            <p className={`text-gray-500 dark:text-light_4 mt-2 ${contactsInView ? 'contact-subtitle' : ''}`}>
                                 {selectedLanguageData.subTitle_1}
                             </p>
                         </div>
                         <div className="space-y-4">
-                            <div className="flex items-center gap-4">
+                            <div className={`flex items-center gap-4 ${contactsInView ? 'contact-item' : ''}`}>
                                 <IoMailOpenOutline className="w-6 h-6 text-light_5 dark:text-light_4" />
                                 <div>
                                     <p className="font-medium dark:text-dark_4">Email</p>
@@ -65,7 +65,7 @@ function Contacts({ language }) {
                                     </h3>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-4">
+                            <div className={`flex items-center gap-4 ${contactsInView ? 'contact-item' : ''}`}>
                                 <FaPhone className="w-6 h-6 text-light_5 dark:text-light_4" />
                                 <div>
                                     <p className="font-medium dark:text-dark_4">Phone</p>
@@ -76,7 +76,7 @@ function Contacts({ language }) {
                             </div>
                         </div>
                     </div>
-                    <div className="bg-light_3 dark:bg-dark_4 rounded-lg p-6 md:p-8">
+                    <div className={`bg-light_3 dark:bg-dark_4 rounded-lg p-6 md:p-8 ${contactsInView ? 'contact-item' : ''}`}>
                         <h3 className="text-2xl font-bold mb-4 dark:text-dark_3">{selectedLanguageData.sendMsgTitle}</h3>
                         <form className="space-y-4">
                             <div>

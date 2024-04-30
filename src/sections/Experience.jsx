@@ -1,7 +1,7 @@
 import React from 'react';
 import { BsFillCircleFill } from "react-icons/bs";
 
-function Experience({ language }) {
+function Experience({ language, experienceInView }) {
     const experienceData = {
         fr: {
             title: 'Expérience professionnelle',
@@ -55,13 +55,13 @@ function Experience({ language }) {
 
     return (
         <>
-            <div className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto mb-28">
                 <h2 className="text-3xl font-bold mb-4 dark:text-dark_5">{selectedLanguageData.title}</h2>
                 <div className="relative">
                     <div className="absolute top-0 left-0 w-0.5 h-full bg-gray-300 dark:bg-gray-700" />
                     <div className="space-y-8">
                         {selectedLanguageData.jobs.map((job, index) => (
-                            <div key={index} className="relative pl-8">
+                            <div key={index} className={`relative pl-8 ${experienceInView ? 'experience-item' : ''}`}>
                                 <div className="absolute top-1 left-0 w-4 h-4 rounded-full">
                                     <BsFillCircleFill className="dark:text-dark_4 text-light_7"  />
                                 </div>

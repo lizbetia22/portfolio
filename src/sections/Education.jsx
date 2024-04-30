@@ -4,7 +4,7 @@ import { LuFileBadge } from "react-icons/lu";
 import { GoTrophy } from "react-icons/go";
 import { LiaUniversitySolid } from "react-icons/lia";
 
-function Education({ language }) {
+function Education({ language, educationInView }) {
     const educationData = {
         fr: {
             title: 'Éducation',
@@ -79,7 +79,7 @@ function Education({ language }) {
                     <div className="flex flex-col justify-center space-y-4">
                         <ul className="grid gap-6">
                             {selectedLanguageData.courses.map((course, index) => (
-                                <li key={index} className="flex items-start gap-4">
+                                <li key={index} className={`${educationInView ? 'education-item' : ''} flex items-start gap-4`}>
                                     {course.icon}
                                     <div className="space-y-1">
                                         <h3 className="text-xl dark:text-light_1 font-bold">{course.title}</h3>
@@ -91,12 +91,7 @@ function Education({ language }) {
                             ))}
                         </ul>
                     </div>
-                    <LiaUniversitySolid className="lg:aspect-square h-72 w-72 dark:text-light_1" />
-                    {/*<img*/}
-                    {/*    alt="Education"*/}
-                    {/*    className="aspect-video overflow-hidden rounded-xl object-cover lg:aspect-square h-2/2 w-2/3 dark:text-light_1"*/}
-                    {/*    src="/university_logo.png"*/}
-                    {/*/>*/}
+                    <LiaUniversitySolid className={`${educationInView ? 'education-item' : ''} lg:aspect-square h-80 w-80 dark:text-light_1`}/>
                 </div>
             </div>
         </>

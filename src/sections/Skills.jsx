@@ -102,10 +102,9 @@ function Skills({ language, skillsInView }) {
 
     const selectedLanguageData = skillsData[language];
 
-    console.log(skillsInView)
     return (
         <>
-                <div className="container mx-auto px-4 md:px-8">
+                <div className="container mx-auto px-4 md:px-8 mb-28">
                     <div className="space-y-8">
                         <div className="text-center">
                             <h2 className="text-3xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">{selectedLanguageData.title}</h2>
