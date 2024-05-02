@@ -3,6 +3,7 @@ import { FaComment, FaTrash } from "react-icons/fa";
 import { IoSettings } from "react-icons/io5";
 import ModalDelete from "../components/ModalDelete";
 import ModalEdit from "../components/ModalEdit";
+import { IoCreate } from "react-icons/io5";
 
 function Blog({language}) {
     const [posts, setPosts] = useState([]);
@@ -15,12 +16,16 @@ function Blog({language}) {
     const [editedTags, setEditedTags] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [postToDelete, setPostToDelete] = useState(null);
+    // const [newPostTitle, setNewPostTitle] = useState('');
+    // const [newPostBody, setNewPostBody] = useState('');
+    // const [newPostTags, setNewPostTags] = useState('');
 
     const blogData = {
         fr: {
             button_edit: 'Modifier l\'article',
             button_delete: 'Supprimer l\'article',
             button_comments: 'Commentaires',
+            button_create: 'Créer un poste',
             title_comments: 'Commentaires: ',
             reactions: 'Réactions',
             title_1: 'Articles',
@@ -30,6 +35,7 @@ function Blog({language}) {
             button_edit: 'Modify post',
             button_delete: 'Delete post',
             button_comments: 'Comments',
+            button_create: 'Create post',
             title_comments: 'Comments: ',
             reactions: 'Reactions',
             title_1: 'Blog',
@@ -48,8 +54,7 @@ function Blog({language}) {
         })
             .then((response) => response.json())
             .then((data) => {
-                const firstTenPosts = data.posts.map(post => ({ ...post, reactions: post.reactions || 0 }));
-                setPosts(firstTenPosts);
+                setPosts(data.posts.slice(0, 10));
             })
             .catch((error) => console.log(error));
     }, []);
@@ -207,6 +212,11 @@ function Blog({language}) {
                                                 onClick={() => toggleComments(post.id)}>
                                                 <FaComment className="w-4 h-4 mr-2"/>
                                                 {translations.button_comments}
+                                            </button>
+                                            <button
+                                                className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4">
+                                                <IoCreate  className="w-6 h-6 mr-2"/>
+                                                {translations.button_create}
                                             </button>
                                             <button
                                                 className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"

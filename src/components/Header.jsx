@@ -145,12 +145,11 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, 
                             </> : ""}
                     </div>
                     <nav className="flex items-center space-x-6">
-                        {currentPath !== "/" ?
-                            "" :
+                        {currentPath === "/" &&
                             <>
-                                {menuItems[language].map((item, index) => (
+                                {menuItems["en"].map((item, index) => (
                                     <Link
-                                        key={index}
+                                        key={menuItems[language][index].title}
                                         to={item.title.toLowerCase()}
                                         className="cursor-pointer text-lg text-gray-700 dark:text-dark_5 dark:hover:text-dark_4 hover:text-light_7 font-mono"
                                         smooth={true}
@@ -159,7 +158,7 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, 
                                         exact="true"
                                         offset={-headerHeight}
                                     >
-                                        {item.title}
+                                        {menuItems[language][index].title}
                                     </Link>
                                 ))}
                             </>

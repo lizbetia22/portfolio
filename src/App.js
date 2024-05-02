@@ -9,7 +9,6 @@ import Footer from "./components/Footer";
 import {useState} from "react";
 import Blog from "./pages/Blog";
 import Login from "./pages/Login";
-import {GoogleReCaptchaProvider} from "react-google-recaptcha-v3";
 
 function App() {
     const [language, setLanguage] = useState("en");
@@ -21,11 +20,9 @@ function App() {
     const [educationInView, setEducationInView] = useState(false);
     const [experienceInView, setExperienceInView] = useState(false);
     const [contactsInView, setContactsInView] = useState(false);
-    const CAPTCHA_KEY = process.env.REACT_APP_RECAPTCHA
 
     return (
         <>
-            <GoogleReCaptchaProvider reCaptchaKey={CAPTCHA_KEY}>
                 <Router>
                     <div className="bg-light_2 dark:bg-dark_2">
                         <Header language={language} setLanguage={setLanguage} darkMode={darkMode}
@@ -66,7 +63,6 @@ function App() {
                         <Footer language={language}/>
                     </div>
                 </Router>
-            </GoogleReCaptchaProvider>
         </>
     );
 }

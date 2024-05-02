@@ -25,7 +25,7 @@ function Education({ language, educationInView }) {
                     icon: <GoTrophy className="h-8 w-8 text-gray-500 dark:text-gray-400" />
                 },
                 {
-                    title: "Licence en technologies de l'information et de l'analyse et gestion",
+                    title: "Licence en technologies de l'information et du management",
                     institution: "NURE : Université nationale de Radioélectronique de Kharkiv",
                     status: "Terminé : juin 2023",
                     average: "",
