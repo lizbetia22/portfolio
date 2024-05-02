@@ -157,6 +157,26 @@
     transform: scale(1.5);
 }
 
+.education-icons {
+    transition: transform 0.4s ease;
+}
+
+.education-icons:hover {
+    transform: scale(1.5);
+}
+
+.contacts-icons {
+    transition: transform 0.4s ease;
+}
+
+.contacts-icons:hover {
+    transform: scale(1.5);
+}
+
+
+
+
+
 
 
 

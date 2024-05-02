@@ -78,6 +78,7 @@ function Contacts({language, contactsInView}) {
     const [isSuccess, setIsSuccess] = useState(false);
     const [isError, setIsError] = useState(false);
 
+    //verifications of forms
     const validateForm = () => {
         let valid = true;
         const newErrors = {...errors};
@@ -121,7 +122,9 @@ function Contacts({language, contactsInView}) {
         return valid;
     };
 
-
+    /**
+     * @description validation of forms
+     */
     useEffect(() => {
         let successTimer;
         let errorTimer;
@@ -149,6 +152,10 @@ function Contacts({language, contactsInView}) {
         setFormData({...formData, [name]: value});
     };
 
+    /**
+     * @description sending email with API EmailJs
+     * @param e
+     */
     const sendEmail = (e) => {
         e.preventDefault();
 
@@ -184,7 +191,7 @@ function Contacts({language, contactsInView}) {
                         </div>
                         <div className="space-y-4">
                             <div className={`flex items-center gap-4 ${contactsInView ? 'contact-item' : ''}`}>
-                                <IoMailOpenOutline className="w-6 h-6 text-light_5 dark:text-light_4"/>
+                                <IoMailOpenOutline className="w-6 h-6 text-light_5 dark:text-light_4 contacts-icons"/>
                                 <div>
                                     <p className="font-medium dark:text-dark_4">Email</p>
                                     <h3 className=" text-light_5 dark:text-light_4 hover:underline">
@@ -193,7 +200,7 @@ function Contacts({language, contactsInView}) {
                                 </div>
                             </div>
                             <div className={`flex items-center gap-4 ${contactsInView ? 'contact-item' : ''}`}>
-                                <FaPhone className="w-6 h-6 text-light_5 dark:text-light_4"/>
+                                <FaPhone className="w-6 h-6 text-light_5 dark:text-light_4 contacts-icons"/>
                                 <div>
                                     <p className="font-medium dark:text-dark_4">Phone</p>
                                     <h3 className="text-light_5 dark:text-light_4 hover:underline">

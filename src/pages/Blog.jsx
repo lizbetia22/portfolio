@@ -4,6 +4,7 @@ import { IoSettings } from "react-icons/io5";
 import ModalDelete from "../components/ModalDelete";
 import ModalEdit from "../components/ModalEdit";
 import { IoCreate } from "react-icons/io5";
+import ModalCreate from "../components/ModalCreate";
 
 function Blog({language}) {
     const [posts, setPosts] = useState([]);
@@ -16,9 +17,10 @@ function Blog({language}) {
     const [editedTags, setEditedTags] = useState('');
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [postToDelete, setPostToDelete] = useState(null);
-    // const [newPostTitle, setNewPostTitle] = useState('');
-    // const [newPostBody, setNewPostBody] = useState('');
-    // const [newPostTags, setNewPostTags] = useState('');
+    const [showCreateModal, setShowCreateModal] = useState(false);
+    const [newPostTitle, setNewPostTitle] = useState('');
+    const [newPostBody, setNewPostBody] = useState('');
+    const [newPostTags, setNewPostTags] = useState('');
 
     const blogData = {
         fr: {
@@ -48,6 +50,9 @@ function Blog({language}) {
         setIsVisible(true);
     }, []);
 
+    /**
+     * @description get  primary data from api
+     */
     useEffect(() => {
         fetch("https://dummyjson.com/posts", {
             method: "GET",
@@ -59,6 +64,12 @@ function Blog({language}) {
             .catch((error) => console.log(error));
     }, []);
 
+    /**
+     *
+     * @param id
+     * @returns {Promise<void>}
+     * @description getting comments for posts
+     */
     async function showCommentsForPost(id) {
         fetch(`https://dummyjson.com/posts/${id}/comments`)
             .then(res => res.json())
@@ -107,6 +118,27 @@ function Blog({language}) {
         setPosts(updatedPosts);
     };
 
+    /**
+     * @description creating of new post
+     */
+    const saveNewPost = () => {
+        const newPost = {
+            id: Math.random().toString(36).substr(2, 9),
+            title: newPostTitle,
+            body: newPostBody,
+            tags: newPostTags.split(',').map(tag => tag.trim()),
+            reactions: 0
+        };
+        setPosts([...posts, newPost]);
+        setShowCreateModal(false);
+        setNewPostTitle('');
+        setNewPostBody('');
+        setNewPostTags('');
+    };
+
+    /**
+     * @description deleting of post
+     */
     const deletePost = () => {
         const updatedPosts = posts.filter(post => post.id !== postToDelete.id);
         setPosts(updatedPosts);
@@ -114,6 +146,9 @@ function Blog({language}) {
         setShowDeleteModal(false);
     };
 
+    /**
+     * @description editing of post
+     */
     const saveEditedPost = () => {
         const updatedPosts = posts.map(post => {
             if (post.id === editingPost.id) {
@@ -214,8 +249,9 @@ function Blog({language}) {
                                                 {translations.button_comments}
                                             </button>
                                             <button
-                                                className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4">
-                                                <IoCreate  className="w-6 h-6 mr-2"/>
+                                                className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
+                                                onClick={() => setShowCreateModal(true)}>
+                                                <IoCreate className="w-6 h-6 mr-2" />
                                                 {translations.button_create}
                                             </button>
                                             <button
@@ -242,10 +278,35 @@ function Blog({language}) {
                     }
                 </div>
             </div>
+            {/*Modal for create post*/}
+            <ModalCreate
+                language={language}
+                showCreateModal={showCreateModal}
+                setShowCreateModal={setShowCreateModal}
+                newPostTitle={newPostTitle}
+                setNewPostTitle={setNewPostTitle}
+                newPostBody={newPostBody}
+                setNewPostBody={setNewPostBody}
+                newPostTags={newPostTags}
+                setNewPostTags={setNewPostTags}
+                saveNewPost={saveNewPost}
+            />
             {/* Modal for edit post */}
-            <ModalEdit language={language} editingPost={editingPost} editedTitle={editedTitle} setEditedTitle={setEditedTitle} editedBody={editedBody} setEditedBody={setEditedBody} editedTags={editedTags} setEditedTags={setEditedTags} setEditingPost={setEditingPost} saveEditedPost={saveEditedPost}/>
+            <ModalEdit language={language}
+                       editingPost={editingPost}
+                       editedTitle={editedTitle}
+                       setEditedTitle={setEditedTitle}
+                       editedBody={editedBody}
+                       setEditedBody={setEditedBody}
+                       editedTags={editedTags}
+                       setEditedTags={setEditedTags}
+                       setEditingPost={setEditingPost}
+                       saveEditedPost={saveEditedPost}/>
             {/* Modal for delete post */}
-            <ModalDelete language={language} showDeleteModal={showDeleteModal} setShowDeleteModal={setShowDeleteModal} deletePost={deletePost}/>
+            <ModalDelete language={language}
+                         showDeleteModal={showDeleteModal}
+                         setShowDeleteModal={setShowDeleteModal}
+                         deletePost={deletePost}/>
         </>
     );
 }

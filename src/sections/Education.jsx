@@ -56,7 +56,7 @@ function Education({ language, educationInView }) {
                     institution: "NURE: Kharkiv National University of Radioelectronics",
                     status: "Completed: June 2023",
                     average: "",
-                    icon: <LuFileBadge className="h-12 w-12 text-gray-500 dark:text-gray-400" />
+                    icon: <LuFileBadge className="h-7 w-7 text-gray-500 dark:text-gray-400" />
                 }
             ]
         }
@@ -80,7 +80,9 @@ function Education({ language, educationInView }) {
                         <ul className="grid gap-6">
                             {selectedLanguageData.courses.map((course, index) => (
                                 <li key={index} className={`${educationInView ? 'education-item' : ''} flex items-start gap-4`}>
-                                    {course.icon}
+                                    <div className="education-icons">
+                                        {course.icon}
+                                    </div>
                                     <div className="space-y-1">
                                         <h3 className="text-xl dark:text-light_1 font-bold">{course.title}</h3>
                                         <p className="text-light_6 dark:text-dark_5">{course.institution}</p>
@@ -91,7 +93,7 @@ function Education({ language, educationInView }) {
                             ))}
                         </ul>
                     </div>
-                    <LiaUniversitySolid className={`${educationInView ? 'education-item' : ''} lg:aspect-square h-80 w-80 dark:text-light_1`}/>
+                        <LiaUniversitySolid className={`${educationInView ? 'education-item' : ''} lg:aspect-square h-80 w-80 dark:text-light_1`}/>
                 </div>
             </div>
         </>

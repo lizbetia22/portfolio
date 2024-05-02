@@ -1,60 +1,76 @@
 import React from 'react';
-import {IoIosSave} from "react-icons/io";
+import { IoIosSave } from "react-icons/io";
+import { BsFillFileEarmarkPostFill } from "react-icons/bs";
 
-const ModalCreate = ({language, editingPost, editedTitle, setEditedTitle, editedBody, setEditedBody, editedTags, setEditedTags, setEditingPost, saveEditedPost}) => {
+const ModalCreate = ({ language, showCreateModal, setShowCreateModal, newPostTitle, setNewPostTitle, newPostBody, setNewPostBody, newPostTags, setNewPostTags, saveNewPost }) => {
 
-    const editModalData = {
+    const createModalData = {
         fr: {
-            title_1: 'Titre',
-            title_2: 'Description',
-            title_3: 'Tags',
-            title_4: 'Sauvegarder',
-            title_5: 'Annuler'
+            title_1: 'Créer un nouveau post',
+            title_2: 'Titre',
+            title_3: 'Description',
+            title_4: 'Tags',
+            title_5: 'Sauvegarder',
+            title_6: 'Annuler'
         },
         en: {
-            title_1: 'Title',
-            title_2: 'Description',
-            title_3: 'Tags',
-            title_4: 'Save',
-            title_5: 'Cancel'
+            title_1: 'Create a new post',
+            title_2: 'Title',
+            title_3: 'Description',
+            title_4: 'Tags',
+            title_5: 'Save',
+            title_6: 'Cancel'
 
         }
     };
 
-    const translations = editModalData[language];
+    const translations = createModalData[language];
 
     return (
         <>
-            {/* Modal for creating of post */}
-            {editingPost && (
+            {/* Modal for creating new post */}
+            {showCreateModal && (
                 <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
                     <div className="bg-white dark:bg-dark_3 p-8 rounded-lg w-1/2">
-                        <h2 className="text-xl font-bold mb-4 dark:text-light_3">{translations.title_1}</h2>
+                        <h2 className="text-xl font-bold mb-4 dark:text-light_3 flex items-center">
+                            <BsFillFileEarmarkPostFill className="mr-2"/>
+                            {translations.title_1}
+                        </h2>
+
                         <input
                             type="text"
-                            value={editedTitle}
-                            onChange={(e) => setEditedTitle(e.target.value)}
-                            className="dark:bg-dark_5 block w-full border border-gray-400 rounded-md mb-4 px-4 py-2"
-                            placeholder="Title"
+                            value={newPostTitle}
+                            onChange={(e) => setNewPostTitle(e.target.value)}
+                            className="dark:bg-dark_3 block w-full border border-gray-400 rounded-md mb-4 px-4 py-2"
+                            placeholder={translations.title_2}
                         />
-                        <h2 className="font-bold mb-4 dark:text-light_3">{translations.title_2}</h2>
                         <textarea
-                            value={editedBody}
-                            onChange={(e) => setEditedBody(e.target.value)}
-                            className="dark:bg-dark_5 block w-full border border-gray-400 rounded-md mb-4 px-4 py-2"
-                            placeholder="Body"
+                            value={newPostBody}
+                            onChange={(e) => setNewPostBody(e.target.value)}
+                            className="dark:bg-dark_3 block w-full border border-gray-400 rounded-md mb-4 px-4 py-2"
+                            placeholder={translations.title_3}
                         />
-                        <h2 className="font-bold mb-4 dark:text-light_3">{translations.title_3}</h2>
                         <input
                             type="text"
-                            value={editedTags}
-                            onChange={(e) => setEditedTags(e.target.value)}
-                            className="dark:bg-dark_5 block w-full border border-gray-400 rounded-md mb-4 px-4 py-2"
-                            placeholder="Tags (comma-separated)"
+                            value={newPostTags}
+                            onChange={(e) => setNewPostTags(e.target.value)}
+                            className="dark:bg-dark_3 block w-full border border-gray-400 rounded-md mb-4 px-4 py-2"
+                            placeholder={translations.title_4}
                         />
                         <div className="flex justify-end">
-                            <button className="mr-2 ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-green-300 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4" onClick={saveEditedPost}><IoIosSave/>{translations.title_4}</button>
-                            <button className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md" onClick={() => setEditingPost(null)}>{translations.title_5}</button>
+                            <button
+                                className="mr-2 ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-green-300 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
+                                onClick={saveNewPost}
+                            >
+                                <IoIosSave />
+                                {translations.title_5}
+                            </button>
+                            <button
+                                className="bg-gray-200 text-gray-800 px-4 py-2 rounded-md"
+                                onClick={() => setShowCreateModal(false)}
+                            >
+                                {translations.title_6}
+                            </button>
                         </div>
                     </div>
                 </div>

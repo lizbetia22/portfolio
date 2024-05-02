@@ -31,7 +31,7 @@ function App() {
                                 setContactsInView={setContactsInView}/>
                         <Routes>
                             <Route
-                                path="/"
+                                path="/portfolio"
                                 element={
                                     <>
                                         <section id="about" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">

@@ -29,6 +29,11 @@ function Login({ language }) {
     };
 
 
+    /**
+     * @description login with JWT token
+     * @param e
+     * @returns {Promise<void>}
+     */
     const handleLogin = async (e) => {
         e.preventDefault();
         try {
