@@ -115,7 +115,7 @@ function Contacts({language, contactsInView}) {
             newErrors.recaptcha = selectedLanguageData.error_recaptcha;
             valid = false;
         } else {
-            newErrors.message = '';
+            newErrors.recaptcha = '';
         }
 
         setErrors(newErrors);
