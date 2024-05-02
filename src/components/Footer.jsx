@@ -24,9 +24,9 @@ function Footer({language}) {
 
     return (
         <>
-            <footer className="flex flex-col gap-2 sm:flex-row py-4 w-full shrink-0 items-center px-4 md:px-6 border-t bg-light_3 dark:bg-dark_3">
+            <footer className="flex flex-col gap-2 sm:flex-row py-4 w-full shrink-0 items-center px-4 md:px-6 border-t bg-light_3 dark:bg-dark_3 justify-between">
                 <p className="text-xs text-light_6 dark:text-dark_5">{selectedLanguageData.copyright}</p>
-                <nav className="sm:ml-5 flex gap-4 sm:gap-6">
+                <nav className="sm: flex gap-4 sm:gap-6">
                     {selectedLanguageData.socialLinks.map((link, index) => (
                         <div key={index} className="text-2xl hover:underline underline-offset-4">
                             <a href={link.url} target="_blank" rel="noopener noreferrer">

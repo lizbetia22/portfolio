@@ -39,7 +39,7 @@ function About({ language }) {
                         style={{ width: '497px', height: '544px' }}
                         alt="me"
                         className={`mx-auto aspect-video overflow-hidden rounded-xl object-cover sm:w-full lg:order-last lg:aspect-square ${isVisible ? 'fade-in' : ''}`}
-                        src="/me.png"
+                        src="/portfolio/me.png"
                     />
                 </div>
             </div>
