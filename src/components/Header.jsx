@@ -141,9 +141,9 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, 
                 <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                     <div className="flex items-center">
                             <FaFacebookMessenger  onClick={()=>{navigate('/login')}} className="w-7 h-7 dark:text-light_1 cursor-pointer" />
-                        {currentPath !== "/portfolio" ?
+                        {currentPath !== "/portfolio/" ?
                             <>
-                                <button onClick={()=>{navigate("/portfolio")}}
+                                <button onClick={()=>{navigate("/portfolio/")}}
                                         className="cursor-pointer text-lg text-gray-700 dark:text-dark_5 dark:hover:text-dark_2 hover:text-light_7 font-mono"
                                 >
                                     <IoHome  className="ml-4 w-8 h-8 text-black dark:text-light_1 cursor-pointer"/>
@@ -151,7 +151,7 @@ const Header = ({language, setLanguage, darkMode, setDarkMode, setSkillsInView, 
                             </> : ""}
                     </div>
                     <nav className="flex items-center space-x-6">
-                        {currentPath === "/portfolio" &&
+                        {currentPath === "/portfolio/" &&
                             <>
                                 {menuItems["en"].map((item, index) => (
                                     <Link
