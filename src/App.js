@@ -34,24 +34,24 @@ function App() {
                                 path="/portfolio"
                                 element={
                                     <>
-                                        <section id="about" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                                        <section id="about" className="w-full py-4 md:py-8 lg:py-12 xl:py-16 mt-0">
                                             <About language={language}/>
                                         </section>
 
-                                        <section id="education" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                                        <section id="education" className="w-full py-4 md:py-8 lg:py-12 xl:py-16 mt-0">
                                             <Education language={language} educationInView={educationInView}/>
                                         </section>
 
-                                        <section id="skills" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                                        <section id="skills" className="w-full py-4 md:py-8 lg:py-12 xl:py-16 mt-0">
                                             <Skills language={language} skillsInView={skillsInView}/>
                                         </section>
 
                                         <section id="experience"
-                                                 className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                                                 className="w-full py-4 md:py-8 lg:py-12 xl:py-16 mt-0">
                                             <Experience language={language} experienceInView={experienceInView}/>
                                         </section>
 
-                                        <section id="contacts" className="w-full py-6 md:py-12 lg:py-16 xl:py-24 mt-0">
+                                        <section id="contacts" className="w-full py-4 md:py-8 lg:py-12 xl:py-16 mt-0">
                                             <Contacts language={language} contactsInView={contactsInView}/>
                                         </section>
                                     </>

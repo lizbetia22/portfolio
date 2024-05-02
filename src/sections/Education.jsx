@@ -52,7 +52,7 @@ function Education({ language, educationInView }) {
                     icon: <GoTrophy className="h-8 w-8 text-gray-500 dark:text-gray-400" />
                 },
                 {
-                    title: "Bachelor's degree in Information and analytical technologies and management",
+                    title: "Bachelor's degree in Information technologies and management",
                     institution: "NURE: Kharkiv National University of Radioelectronics",
                     status: "Completed: June 2023",
                     average: "",

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import {useLocation, useNavigate} from "react-router";
 
 function About({ language }) {
     const aboutData = {
@@ -18,13 +17,6 @@ function About({ language }) {
     const selectedLanguageData = aboutData[language];
 
     const [isVisible, setIsVisible] = useState(false);
-    const navigate = useNavigate();
-    const location = useLocation();
-    const currentPath = location.pathname;
-    // if (currentPath === "/portfolio"){
-    //     navigate("/portfolio/")
-    // }
-
     useEffect(() => {
         setIsVisible(true);
     }, []);
