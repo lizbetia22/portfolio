@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import {DarkModeSwitch} from "react-toggle-dark-mode";
 
-const DarkMode = ({darkMode,setDarkMode}) => {
+const DarkMode = ({darkMode,setDarkMode,className}) => {
     const toggleDarkMode = () => {
         setDarkMode((prevMode) => {
             const newMode = !prevMode;
@@ -21,6 +21,7 @@ const DarkMode = ({darkMode,setDarkMode}) => {
             onChange={toggleDarkMode}
             moonColor={'#C4BBF0'}
             size={20}
+            className={className}
         />
     );
 };

@@ -13,7 +13,7 @@ const getFlag = (country) => {
     }
 };
 
-const LanguageDropdown = ({setLanguage}) => {
+const LanguageDropdown = ({setLanguage, className}) => {
     const [isOpen, setIsOpen] = useState(false);
     const options = [
         { value: 'en', label: <div className="flex items-center w-24"><img src={getFlag('GB')} alt="GB Flag" className="w-6 h-6 mr-2 rounded" /> English</div> },
@@ -32,12 +32,12 @@ const LanguageDropdown = ({setLanguage}) => {
     return (
         <div className="relative inline-block">
             <div onClick={handleLanguageClick}>
-                <GrLanguage className="cursor-pointer w-5 h-5 dark:text-light_1" />
+                <GrLanguage className={`${className ? className : "w-5 h-5"} cursor-pointer dark:text-light_1`} />
             </div>
             {isOpen && (
                 <div className="absolute right-0 mt-2 bg-white border border-gray-300 divide-y divide-gray-100 rounded-md shadow-lg outline-none">
                     {options.map(option => (
-                        <div key={option.value} onClick={() => handleOptionClick(option)} className="px-4 py-2 cursor-pointer hover:bg-gray-100 flex items-center">
+                        <div key={option.value} onClick={() => handleOptionClick(option)} className="px-4 py-2 cursor-pointer text-dark_1 dark:text-dark_1 hover:bg-gray-100 flex items-center">
                             {option.label}
                         </div>
                     ))}
