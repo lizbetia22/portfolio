@@ -55,7 +55,7 @@ function Experience({ language, experienceInView }) {
 
     return (
         <>
-            <div className="max-w-4xl mx-auto mb-28">
+            <div className="max-w-4xl mx-auto mb-28 ml-12 sm:ml-0 md:ml-auto">
                 <h2 className="text-3xl font-bold mb-4 dark:text-dark_5">{selectedLanguageData.title}</h2>
                 <div className="relative">
                     <div className="absolute top-0 left-0 w-0.5 h-full bg-gray-300 dark:bg-gray-700" />

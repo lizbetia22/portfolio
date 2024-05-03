@@ -163,7 +163,7 @@ function Blog({language}) {
     const translations = blogData[language];
     return (
         <>
-            <div className={`mt-20 mb-10 ${isVisible ? 'fade-in' : ''}`}>
+            <div className={`mt-5 mb-10 ${isVisible ? 'fade-in' : ''}`}>
                 <div className="space-y-2 text-center">
                     <h2 className="text-3xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">{translations.title_1}</h2>
                     <p className="dark:text-light_4 text-light_6 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-500">

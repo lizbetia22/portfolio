@@ -61,7 +61,7 @@ function Login({ language }) {
     const translations = loginData[language];
     return (
         <>
-            <div className="mt-32 mb-28">
+            <div className="mt-16 mb-28">
                 <div className="space-y-2 text-center">
                     <h2 className="text-xl dark:text-dark_5 font-bold tracking-tighter sm:text-5xl">{translations.title_1}</h2>
                     <p className="dark:text-light_4 text-light_6 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-500">
