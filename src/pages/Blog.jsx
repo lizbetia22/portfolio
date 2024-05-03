@@ -169,8 +169,14 @@ function Blog({language}) {
                     <p className="dark:text-light_4 text-light_6 md:text-xl/relaxed lg:text-base/relaxed xl:text-xl/relaxed dark:text-gray-500">
                         {translations.title_2}
                     </p>
+                    <button
+                        className="float-end mr-3 ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
+                        onClick={() => setShowCreateModal(true)}>
+                        <IoCreate className="w-6 h-6 mr-2" />
+                        {translations.button_create}
+                    </button>
                 </div>
-                <div className="mr-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-10  ml-12">
+                <div className="mr-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-8 mt-16  ml-12">
                     {posts.length === 0 ?
                         <>
                             <div className="h-screen w-screen flex items-center justify-center"></div>
@@ -247,12 +253,6 @@ function Blog({language}) {
                                                 onClick={() => toggleComments(post.id)}>
                                                 <FaComment className="w-4 h-4 mr-2"/>
                                                 {translations.button_comments}
-                                            </button>
-                                            <button
-                                                className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
-                                                onClick={() => setShowCreateModal(true)}>
-                                                <IoCreate className="w-6 h-6 mr-2" />
-                                                {translations.button_create}
                                             </button>
                                             <button
                                                 className="ml-2 flex items-center text-light_7 border border-light_3 px-4 py-2 rounded-md hover:bg-light_2 dark:text-light_3 dark:border-dark_5 dark:hover:bg-dark_4"
