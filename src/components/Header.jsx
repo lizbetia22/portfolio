@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react";
 import {Link} from "react-scroll";
 import LanguageDropdown from "./DropDownLanguage";
-//import { SiDailydotdev } from "react-icons/si";
+import { SiDailydotdev } from "react-icons/si";
 import DarkMode from "./DarkMode";
 import {useLocation, useNavigate} from "react-router";
 import {IoHome} from "react-icons/io5";
-import {FaFacebookMessenger} from "react-icons/fa";
 
 const Header = ({
                     language,
@@ -144,10 +143,7 @@ const Header = ({
                 {/* Mobile Menu Button */}
                 <div className="md:hidden flex justify-between items-center px-4 py-3">
                     <div className={"flex space-x-3"}>
-                        <FaFacebookMessenger
-                            onClick={() => {
-                                navigate('/login')
-                            }}
+                        <SiDailydotdev
                             className="w-5 h-5 dark:text-light_1 cursor-pointer"
                         />
                         {isMobileMenuOpen && (
@@ -206,9 +202,7 @@ const Header = ({
                 <div style={{ backgroundColor }}>
                     <div className="container mx-auto flex h-16 items-center justify-between px-4 md:px-6">
                         <div className="flex items-center">
-                            <FaFacebookMessenger onClick={() => {
-                                navigate('/login')
-                            }} className="w-7 h-7 dark:text-light_1 cursor-pointer"/>
+                            <SiDailydotdev className="w-7 h-7 dark:text-light_1 cursor-pointer"/>
                             {currentPath === "/portfolio/" || currentPath === "/portfolio" ?
                                 "" :
                                 <>
